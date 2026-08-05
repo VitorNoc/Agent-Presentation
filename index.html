@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Contract Review Assistant — Belmoney Operations</title>
+<meta name="description" content="How Belmoney Operations uses the AI Contract Review Assistant, from first click to final approval.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@500;600;700&family=Roboto:wght@400;500&family=Roboto+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="print.css" media="print">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- ============================== NAV ============================== -->
+<nav class="topnav hide-print">
+  <div class="topnav-inner">
+    <a href="#top" class="brand-mark">
+      <svg viewBox="0 0 230 236" style="color:var(--teal-900)" xmlns="http://www.w3.org/2000/svg" fill="none"><path d="M230.792 60.6168C230.792 82.7968 201.543 102.467 156.473 114.677C147.973 116.977 138.902 119.017 129.363 120.757C120.803 122.317 111.863 123.637 102.603 124.697C85.5225 126.647 67.3625 127.697 48.5325 127.697C39.3225 127.697 30.2725 127.447 21.4325 126.957C15.4625 126.627 9.5925 126.197 3.8325 125.657C0.232502 125.327 -1.3075 120.907 1.3125 118.397L17.8125 102.587L49.0925 72.6068C50.0525 71.6868 51.3925 71.2768 52.7125 71.5068C62.3025 73.1368 72.8125 74.0268 83.8325 74.0268C128.923 74.0268 165.482 59.0068 165.482 40.4868C165.482 27.6568 147.943 16.5068 122.173 10.8668C119.162 10.2068 118.073 6.48682 120.303 4.35682L123.733 1.06682C124.613 0.226823 125.853 -0.153186 127.062 0.0568137C157.152 5.34681 182.683 13.5968 200.883 23.7668C219.803 34.3468 230.803 46.9968 230.803 60.6068L230.792 60.6168Z" fill="currentColor"/><path d="M230.793 168.717C230.793 205.767 149.193 235.797 48.5325 235.797C33.8225 235.797 19.5225 235.157 5.82253 233.947C2.28253 233.637 0.692532 229.337 3.18253 226.797L48.1025 180.667C49.0725 179.667 50.4725 179.227 51.8425 179.467C61.6625 181.187 72.4725 182.137 83.8225 182.137C128.913 182.137 165.473 167.117 165.473 148.597C165.473 136.997 151.143 126.777 129.363 120.757C138.903 119.017 147.963 116.977 156.473 114.677C201.543 126.887 230.793 146.547 230.793 168.727V168.717Z" fill="currentColor"/></svg>
+      belmoney
+      <span class="brand-tag">Ops Docs</span>
+    </a>
+    <ul class="navlinks">
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#workflow">Workflow</a></li>
+      <li><a href="#approval">Approval</a></li>
+      <li><a href="#mistakes">Mistakes</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#reference">Reference</a></li>
+      <li><a href="#support">Support</a></li>
+    </ul>
+    <button class="btn btn-outline hide-print" style="padding:9px 16px;" onclick="window.print()">
+      <i data-lucide="printer" style="width:15px;height:15px"></i> Print / PDF
+    </button>
+  </div>
+</nav>
+
+<!-- ============================== HERO ============================== -->
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <p class="eyebrow">Belmoney Operations · Internal Documentation · v2.0</p>
+    <h1 class="display-1">Contracts move<br>at the speed of<br><span class="accent">conversation.</span></h1>
+    <p class="hero-lede">The AI Contract Review Assistant turns partner contract questions and revisions into a short ClickUp conversation — while a human approver keeps final control of every change.</p>
+    <div class="hero-actions">
+      <a href="#overview" class="btn btn-lime">Start reading <i data-lucide="arrow-right" style="width:15px;height:15px"></i></a>
+      <a href="#reference" class="btn btn-ghost-dark">Jump to Quick Reference</a>
+    </div>
+    <div class="hero-stage" aria-hidden="true">
+      <svg class="hero-ribbon" viewBox="0 0 1000 210" preserveAspectRatio="none">
+        <path class="dim" d="M0,140 C150,40 300,190 450,110 C600,30 750,170 1000,90"/>
+        <path d="M0,140 C150,40 300,190 450,110 C600,30 750,170 1000,90"/>
+      </svg>
+    </div>
+  </div>
+  <div class="scroll-cue hide-print"><i data-lucide="chevron-down" style="width:14px;height:14px"></i> Scroll to explore</div>
+</header>
+
+<main>
+
+<!-- ============================== OVERVIEW ============================== -->
+<section class="section-pad" id="overview">
+  <div class="wrap-narrow">
+    <div class="section-head reveal">
+      <p class="eyebrow">01 — Overview</p>
+      <h2 class="section-title">A teammate for contract review, not a replacement for one.</h2>
+      <p class="lede">A conversational agent embedded directly in ClickUp. It answers partner contract questions and prepares revisions — without anyone leaving the task.</p>
+    </div>
+
+    <div class="grid-2 reveal">
+      <div class="card">
+        <div class="card-icon"><i data-lucide="message-circle"></i></div>
+        <h3 class="card-title">What it is</h3>
+        <p class="card-text">Operations writes one plain-English comment on a task. The assistant reads it, checks the partner's Service Order, and either answers the question or drafts the requested change.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon"><i data-lucide="history"></i></div>
+        <h3 class="card-title">Why it exists</h3>
+        <p class="card-text">Contract requests used to mean digging through folders, cross-checking Service Orders by hand, and waiting on manual edits. The assistant compresses that into a conversation — a human approver still decides what actually changes.</p>
+      </div>
+    </div>
+
+    <div class="callout reveal">
+      <span class="label">Note</span>
+      <p>The assistant is a support tool for Operations, not a replacement for judgment or approval authority. It prepares answers and draft revisions; the designated Commercial or Legal approver always decides before anything is finalized.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== PROBLEM / SOLUTION ============================== -->
+<section class="section-pad on-tint" id="solution">
+  <div class="wrap-narrow">
+    <div class="section-head reveal">
+      <p class="eyebrow">02 — Before &amp; After</p>
+      <h2 class="section-title">What the assistant changes about a normal review day.</h2>
+    </div>
+
+    <div class="grid-3 reveal" style="margin-bottom:24px;">
+      <div class="stat-card"><div class="stat-num">✓</div><div class="stat-label">Faster responses — seconds instead of minutes of manual lookup</div></div>
+      <div class="stat-card"><div class="stat-num">✓</div><div class="stat-label">Less manual work — no more re-typing contract fields</div></div>
+      <div class="stat-card"><div class="stat-num">✓</div><div class="stat-label">Standardized review — the same reliable process, every time</div></div>
+    </div>
+    <div class="grid-3 reveal">
+      <div class="feature-card card">
+        <div class="card-icon"><i data-lucide="shield-check"></i></div>
+        <h3 class="card-title">Lower risk</h3>
+        <p class="card-text">The designated approver signs off before any document is modified.</p>
+      </div>
+      <div class="feature-card card">
+        <div class="card-icon"><i data-lucide="repeat"></i></div>
+        <h3 class="card-title">Consistency</h3>
+        <p class="card-text">Answers are grounded in the same approved knowledge base every time.</p>
+      </div>
+      <div class="feature-card card">
+        <div class="card-icon"><i data-lucide="trending-up"></i></div>
+        <h3 class="card-title">Scalability</h3>
+        <p class="card-text">The team can absorb more review volume without more headcount.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== QUICK START ============================== -->
+<section class="section-pad" id="workflow">
+  <div class="wrap-narrow">
+    <div class="section-head reveal">
+      <p class="eyebrow">03 — Quick Start</p>
+      <h2 class="section-title">Your first conversation, in three moves.</h2>
+      <p class="lede">Before you begin, confirm four things on the task.</p>
+    </div>
+
+    <ul class="checklist reveal">
+      <li><i data-lucide="check-circle-2"></i> Task status is set to "Contract Review"</li>
+      <li><i data-lucide="check-circle-2"></i> The customer's request is written in the task</li>
+      <li><i data-lucide="check-circle-2"></i> The latest Service Order is available in the partner folder</li>
+      <li><i data-lucide="check-circle-2"></i> The "Contract Review Agent" button has been clicked</li>
+    </ul>
+    <div class="callout warning reveal">
+      <span class="label">Warning</span>
+      <p>If any of these four conditions is missing, the assistant will not respond as expected. Task status is the most common reason a conversation doesn't start — check that first.</p>
+    </div>
+
+    <div class="reveal" style="margin-top:48px;">
+      <div class="mockup">
+        <div class="mockup-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="task-title">ClickUp · Task #4821 — Acme Partners Service Order</span></div>
+        <div class="mockup-body">
+          <div class="mockup-row">
+            <div class="mockup-num">1</div>
+            <div class="mockup-content">
+              <span class="mockup-status"><span class="dot-live"></span> CONTRACT REVIEW</span>
+              <p class="mockup-hint">Status already set on this task</p>
+            </div>
+          </div>
+          <div class="mockup-row">
+            <div class="mockup-num">2</div>
+            <div class="mockup-content">
+              <span class="mockup-btn">Contract Review Agent</span>
+              <p class="mockup-hint">Click once to activate — wait for the ready message</p>
+            </div>
+          </div>
+          <div class="mockup-row">
+            <div class="mockup-avatar"></div>
+            <div class="mockup-content">
+              <div class="mockup-comment">"Please update the Monthly Platform Fee to EUR 1,250 per month."</div>
+              <p class="mockup-hint">Write your request as a comment on this task</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="mockup-hint" style="margin-top:10px;">Illustrative interface guide — layout simplified for clarity, not an exact product screenshot.</p>
+    </div>
+
+    <div class="spine-wrap reveal" style="margin-top:56px;">
+      <svg class="spine-svg" preserveAspectRatio="none"><line class="spine-track" x1="1" y1="0" x2="1" y2="100%"/><line class="spine-fill" x1="1" y1="0" x2="1" y2="100%"/></svg>
+      <div class="step is-done">
+        <div class="step-marker">1</div>
+        <div><div class="step-title">Click "Contract Review Agent"</div><div class="step-text">This manually activates the assistant for this task only. It never starts on its own.</div></div>
+      </div>
+      <div class="step is-done">
+        <div class="step-marker">2</div>
+        <div><div class="step-title">Wait for initialization</div><div class="step-text">The assistant confirms it's ready with a short message in the comment thread.</div></div>
+      </div>
+      <div class="step is-done">
+        <div class="step-marker">3</div>
+        <div><div class="step-title">Write your request</div><div class="step-text">Describe the customer's request in one plain-English comment, exactly as you'd explain it to a colleague.</div></div>
+      </div>
+    </div>
+
+    <div class="callout tip reveal">
+      <span class="label">Tip</span>
+      <p>If a response looks incomplete, ask a specific follow-up rather than guessing. See "How to Write a Request" below for the exact pattern to use.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== HOW TO WRITE A REQUEST ============================== -->
+<section class="section-pad on-tint">
+  <div class="wrap-narrow">
+    <div class="section-head reveal">
+      <p class="eyebrow">04 — Requests</p>
+      <h2 class="section-title">One clear comment. One hard rule.</h2>
+    </div>
+
+    <div class="callout rule reveal">
+      <span class="label">Rule</span>
+      <p>Submit exactly one contract change per message. Requests containing multiple changes are stopped and must be resubmitted separately.</p>
+    </div>
+
+    <div class="compare reveal">
+      <div class="compare-card good">
+        <div class="compare-head"><i data-lucide="check" style="width:15px;height:15px"></i> Accepted</div>
+        <div class="compare-body">"Please update the Monthly Platform Fee to EUR 1,250 per month."</div>
+      </div>
+      <div class="compare-card bad">
+        <div class="compare-head"><i data-lucide="x" style="width:15px;height:15px"></i> Blocked</div>
+        <div class="compare-body">"Please update the address and change the Monthly Platform Fee."</div>
+      </div>
+    </div>
+
+    <div class="card reveal" style="margin-top:8px;">
+      <h4 class="mini-title" style="margin-bottom:8px;">Real request patterns</h4>
+      <div class="pattern-row">
+        <div class="pattern-name">Structured value update</div>
+        <code>"Please update the Monthly Platform Fee to EUR 1,250 per month."</code>
+      </div>
+      <div class="pattern-row">
+        <div class="pattern-name">Company information</div>
+        <code>"Please update the registered office address to 10 Downing Street, London SW1A 2AA, United Kingdom."</code>
+      </div>
+      <div class="pattern-row">
+        <div class="pattern-name">Legal clause revision</div>
+        <code>"Please revise the liability clause so that the Partner's aggregate liability is limited to the total fees paid during the previous twelve months."</code>
+      </div>
+    </div>
+
+    <ul class="checklist reveal" style="margin-top:28px;">
+      <li><i data-lucide="check-circle-2"></i> Be specific — name the field, clause, or value that needs to change</li>
+      <li><i data-lucide="check-circle-2"></i> Give context — mention who the customer is and what they're asking for</li>
+      <li><i data-lucide="check-circle-2"></i> One change, one message — split multi-part requests before you submit</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================== QUESTIONS VS REVISIONS ============================== -->
+<section class="section-pad">
+  <div class="wrap-narrow">
+    <div class="section-head reveal">
+      <p class="eyebrow">05 — Two Paths</p>
+      <h2 class="section-title">Questions vs. revisions.</h2>
+      <p class="lede">Every message you send takes one of two paths — intent detection decides automatically.</p>
+    </div>
+
+    <div class="flow-chain reveal">
+      <span class="node">Message received</span><span class="arrow">→</span>
+      <span class="node">Intent detection</span><span class="arrow">→</span>
+      <span class="node">Path A or Path B</span>
+    </div>
+
+    <div class="path-cards reveal">
+      <div class="path-card path-a">
+        <span class="badge badge-lime"><span class="badge-dot"></span>Path A · Question</span>
+        <h3 class="card-title" style="margin-top:14px;">Contract Question</h3>
+        <ul>
+          <li><i data-lucide="search" style="width:15px;height:15px"></i> Searches the approved knowledge base</li>
+          <li><i data-lucide="message-square" style="width:15px;height:15px"></i> Answers directly in the ClickUp comment</li>
+          <li><i data-lucide="shield-off" style="width:15px;height:15px"></i> No approval required</li>
+          <li><i data-lucide="file" style="width:15px;height:15px"></i> No document is modified</li>
+        </ul>
+      </div>
+      <div class="path-card path-b">
+        <span class="badge badge-green"><span class="badge-dot"></span>Path B · Revision</span>
+        <h3 class="card-title" style="margin-top:14px;">Contract Revision</h3>
+        <ul>
+          <li><i data-lucide="file-edit" style="width:15px;height:15px"></i> Prepares a draft of the requested change</li>
+          <li><i data-lucide="send" style="width:15px;height:15px"></i> Routes the draft to the correct approver</li>
+          <li><i data-lucide="clock" style="width:15px;height:15px"></i> Waits for a Commercial or Legal decision</li>
+          <li><i data-lucide="upload" style="width:15px;height:15px"></i> Edits the DOCX, uploads, and comments in ClickUp</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout tip reveal">
+      <span class="label">Tip</span>
+      <p>You don't need to tell the assistant which path applies — intent detection decides automatically based on what you write.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== SUPPORTED CHANGES ============================== -->
+<section class="section-pad on-tint" id="requests">
+  <div class="wrap-narrow">
+    <div class="section-head reveal">
+      <p class="eyebrow">06 — Scope</p>
+      <h2 class="section-title">Supported requests.</h2>
+      <p class="lede">What the assistant can help with today, and where its scope stops.</p>
+    </div>
+
+    <div class="table-wrap reveal">
+      <table>
+        <thead><tr><th>Scenario</th><th>Purpose</th><th>User action</th></tr></thead>
+        <tbody>
+          <tr><td>Answering contract questions</td><td>Resolve a question about existing terms</td><td>Review the answer before sharing with the customer</td></tr>
+          <tr><td>Preparing revisions</td><td>Draft a single change to a Service Order or clause</td><td>Submit the request and monitor the approval result</td></tr>
+          <tr><td>Clarifying requests</td><td>Resolve ambiguity before any action is taken</td><td>Provide the missing detail the assistant asks for</td></tr>
+          <tr><td>Updating Service Orders</td><td>Reflect an approved change in the partner's file</td><td>Confirm the update once it's published to ClickUp</td></tr>
+          <tr><td>Explaining clauses</td><td>Help a customer or teammate understand a clause</td><td>Confirm the explanation is accurate before forwarding it</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="compare reveal">
+      <div class="compare-card good">
+        <div class="compare-head"><i data-lucide="check" style="width:15px;height:15px"></i> Supported</div>
+        <div class="compare-body" style="font-family:var(--f-body);">Answer contract questions · Prepare revisions · Update Service Orders · Publish revised files after approval</div>
+      </div>
+      <div class="compare-card bad">
+        <div class="compare-head"><i data-lucide="x" style="width:15px;height:15px"></i> Unsupported</div>
+        <div class="compare-body" style="font-family:var(--f-body);">Approve contracts · Modify documents without approval · Operate outside Contract Review status · Access unrelated partner folders</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== APPROVAL FLOW ============================== -->
+<section class="section-pad" id="approval">
+  <div class="wrap-narrow">
+    <div class="section-head reveal">
+      <p class="eyebrow">07 — Approval Flow</p>
+      <h2 class="section-title">Routing, then a human decision.</h2>
+      <p class="lede">Once a message is identified as a revision, the assistant classifies it and routes it to the right approver automatically.</p>
+    </div>
+
+    <div class="flow-chain reveal">
+      <span class="node">Approval classification</span><span class="arrow">→</span>
+      <span class="node">Commercial or Legal approval</span><span class="arrow">→</span>
+      <span class="node">Approval decision</span>
+    </div>
+
+    <div class="path-cards reveal">
+      <div class="path-card path-a">
+        <h3 class="card-title">Commercial approval</h3>
+        <p class="card-text" style="margin-top:6px;">Fees · Pricing · Payment conditions · Company information · Operational Service Order fields</p>
+      </div>
+      <div class="path-card path-b">
+        <h3 class="card-title">Legal approval</h3>
+        <p class="card-text" style="margin-top:6px;">Liability · Governing law · Confidentiality · Compliance · Termination · Contractual wording</p>
+      </div>
+    </div>
+
+    <div class="callout reveal">
+      <span class="label">Note</span>
+      <p>Routing is automatic — you don't choose the approver. The assistant classifies the request based on what's being changed and sends it to the right team.</p>
+    </div>
+
+    <div class="spine-wrap reveal" style="margin-top:56px;">
+      <svg class="spine-svg" preserveAspectRatio="none"><line class="spine-track" x1="1" y1="0" x2="1" y2="100%"/><line class="spine-fill" x1="1" y1="0" x2="1" y2="100%"/></svg>
+      <div class="step is-done">
+        <div class="step-marker"><i data-lucide="sparkles" style="width:17px;height:17px"></i></div>
+        <div><div class="step-title">The AI prepares</div><div class="step-text">It drafts the proposed revision and shows exactly what would change.</div></div>
+      </div>
+      <div class="step is-done">
+        <div class="step-marker"><i data-lucide="user-check" style="width:17px;height:17px"></i></div>
+        <div><div class="step-title">The approver decides</div><div class="step-text">The designated Commercial or Legal approver reviews the proposed change and decides whether it may proceed.</div></div>
+      </div>
+      <div class="step is-done">
+        <div class="step-marker"><i data-lucide="lock" style="width:17px;height:17px"></i></div>
+        <div><div class="step-title">Nothing changes without approval</div><div class="step-text">No document is edited or published until approval is explicitly granted.</div></div>
+      </div>
+    </div>
+
+    <div class="table-wrap reveal" style="margin-top:40px;">
+      <table>
+        <thead><tr><th>Role</th><th>Responsibility</th></tr></thead>
+        <tbody>
+          <tr><td>Operations</td><td>Initiates the request and monitors the approval result</td></tr>
+          <tr><td>Commercial approver</td><td>Reviews and approves or rejects commercial changes (fees, pricing, company information)</td></tr>
+          <tr><td>Legal approver</td><td>Reviews and approves or rejects legal changes (liability, compliance, contractual wording)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout warning reveal">
+      <span class="label">Warning</span>
+      <p>Operations does not approve revisions. The role of Operations is to submit a clear, well-scoped request and monitor the outcome — the designated approver makes the decision.</p>
+    </div>
+    <div class="callout rule reveal">
+      <span class="label">Rule</span>
+      <p>Rejected approvals immediately stop the workflow. No partial changes are ever applied.</p>
+    </div>
+
+    <h3 class="card-title reveal" style="margin-top:48px;">What happens after approval</h3>
+    <div class="flow-chain reveal">
+      <span class="node">Approval granted</span><span class="arrow">→</span>
+      <span class="node">Retrieve Service Order</span><span class="arrow">→</span>
+      <span class="node">Update DOCX</span><span class="arrow">→</span>
+      <span class="node">Preserve formatting</span><span class="arrow">→</span>
+      <span class="node">Publish to ClickUp</span>
+    </div>
+    <div class="callout reveal">
+      <span class="label">Note</span>
+      <p>Only the fields or clauses named in the approved request are changed. Everything else in the document — including formatting, headers, and unrelated clauses — is preserved exactly as it was.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== LIVE EXAMPLE ============================== -->
+<section class="section-pad on-dark" id="example">
+  <div class="wrap-narrow">
+    <div class="section-head reveal">
+      <p class="eyebrow">08 — Live Example</p>
+      <h2 class="section-title">One request, start to finish.</h2>
+      <p class="lede">A realistic request followed through the entire lifecycle, so every piece above fits together.</p>
+    </div>
+
+    <div class="spine-wrap reveal" style="margin-top:48px;">
+      <svg class="spine-svg" preserveAspectRatio="none"><line class="spine-track" x1="1" y1="0" x2="1" y2="100%" style="stroke:rgba(255,255,255,0.18)"/><line class="spine-fill" x1="1" y1="0" x2="1" y2="100%"/></svg>
+
+      <div class="step is-done">
+        <div class="step-marker">1</div>
+        <div><div class="step-title" style="color:var(--white)">Customer request</div><div class="step-text" style="color:#AFC9C6">Acme Partners emails their account manager: "Can our monthly platform fee be updated to EUR 1,250? We agreed on this during renewal."</div></div>
+      </div>
+      <div class="step is-done">
+        <div class="step-marker">2</div>
+        <div><div class="step-title" style="color:var(--white)">Operator action</div><div class="step-text" style="color:#AFC9C6">The operator opens Task #4821, confirms status is "Contract Review," clicks "Contract Review Agent," and writes the request.</div></div>
+      </div>
+      <div class="step is-done">
+        <div class="step-marker">3</div>
+        <div><div class="step-title" style="color:var(--white)">AI response</div><div class="step-text" style="color:#AFC9C6">The assistant identifies the Monthly Platform Fee field and prepares a draft: current value EUR 950, proposed value EUR 1,250.</div></div>
+      </div>
+      <div class="step is-done">
+        <div class="step-marker">4</div>
+        <div><div class="step-title" style="color:var(--white)">Approval</div><div class="step-text" style="color:#AFC9C6">A commercial field, so it's routed to the Commercial approver, who reviews the side-by-side comparison and approves it.</div></div>
+      </div>
+      <div class="step is-done">
+        <div class="step-marker">5</div>
+        <div><div class="step-title" style="color:var(--white)">Document generation</div><div class="step-text" style="color:#AFC9C6">The assistant retrieves the latest Service Order, updates only the fee field, and preserves every other clause and all formatting.</div></div>
+      </div>
+      <div class="step is-done">
+        <div class="step-marker">6</div>
+        <div><div class="step-title" style="color:var(--white)">ClickUp notification</div><div class="step-text" style="color:#AFC9C6">A final comment confirms the update, with a link to the revised file in Acme Partners' Drive folder.</div></div>
+      </div>
+      <div class="step is-done">
+        <div class="step-marker">7</div>
+        <div><div class="step-title" style="color:var(--white)">Completed task</div><div class="step-text" style="color:#AFC9C6">The operator confirms the update and replies to the customer with the new fee, referencing the revised Service Order.</div></div>
+      </div>
+    </div>
+
+    <div class="callout tip reveal" style="background:rgba(30,122,76,0.18); border-color:var(--lime);">
+      <span class="label" style="color:var(--lime)">Tip</span>
+      <p style="color:var(--teal-050)">Notice that Operations never approves anything and never edits the document directly — the operator's job is steps 2 and 7 only.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== BEST PRACTICES ============================== -->
+<section class="section-pad">
+  <div class="wrap-narrow">
+    <div class="section-head reveal">
+      <p class="eyebrow">09 — Habits</p>
+      <h2 class="section-title">Best practices.</h2>
+      <p class="lede">Habits that keep every conversation fast, accurate, and safe.</p>
+    </div>
+
+    <div class="grid-2 reveal">
+      <ul class="checklist mt-0">
+        <li><i data-lucide="check-circle-2"></i> One change per message — mixing topics gets requests blocked</li>
+        <li><i data-lucide="check-circle-2"></i> Provide complete customer information up front</li>
+        <li><i data-lucide="check-circle-2"></i> Review every draft carefully, like a colleague's first draft</li>
+      </ul>
+      <ul class="checklist mt-0">
+        <li><i data-lucide="check-circle-2"></i> Let the right approver decide — never approve on their behalf</li>
+        <li><i data-lucide="check-circle-2"></i> Avoid unrelated discussions in the task thread</li>
+      </ul>
+    </div>
+
+    <div class="compare reveal" style="margin-top:8px;">
+      <div class="compare-card good">
+        <div class="compare-head"><i data-lucide="check" style="width:15px;height:15px"></i> Correct</div>
+        <div class="compare-body">"Please revise the liability clause so aggregate liability is capped at 12 months of fees."</div>
+      </div>
+      <div class="compare-card bad">
+        <div class="compare-head"><i data-lucide="x" style="width:15px;height:15px"></i> Incorrect</div>
+        <div class="compare-body">"Please update the address and change the fee and fix the liability clause" — three changes in one message.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== COMMON MISTAKES ============================== -->
+<section class="section-pad on-tint" id="mistakes">
+  <div class="wrap-narrow">
+    <div class="section-head reveal">
+      <p class="eyebrow">10 — Common Mistakes</p>
+      <h2 class="section-title">Patterns that slow requests down.</h2>
+      <p class="lede">And exactly what to write instead.</p>
+    </div>
+
+    <div class="table-wrap reveal">
+      <table>
+        <thead><tr><th>Mistake</th><th>Why it fails</th><th>Write this instead</th></tr></thead>
+        <tbody>
+          <tr><td>Vague requests — "fix the contract"</td><td>The assistant has no field or clause to act on</td><td>Name the exact field: "Update the Monthly Platform Fee to EUR 1,250."</td></tr>
+          <tr><td>Multiple changes in one message</td><td>Intent detection can't classify a mixed request</td><td>Split into separate messages, one per change</td></tr>
+          <tr><td>Missing information</td><td>The assistant pauses to ask a clarifying question</td><td>Include the full value, currency, and party up front</td></tr>
+          <tr><td>Approving on the customer's behalf</td><td>Operations has no approval authority</td><td>Submit the request and wait for the approver's decision</td></tr>
+          <tr><td>Re-asking after a rejection</td><td>A rejection is a decision, not an error</td><td>Read the feedback and adjust before resubmitting</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout tip reveal">
+      <span class="label">Tip</span>
+      <p>Almost every blocked or delayed request traces back to one of these five patterns. Scan this list before you submit if a request feels complicated.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== TROUBLESHOOTING ============================== -->
+<section class="section-pad" id="troubleshooting">
+  <div class="wrap-narrow">
+    <div class="section-head reveal">
+      <p class="eyebrow">11 — Troubleshooting</p>
+      <h2 class="section-title">Know the cause before you escalate.</h2>
+    </div>
+
+    <div class="grid-2 reveal">
+      <div class="card">
+        <span class="badge badge-amber"><span class="badge-dot"></span>User error</span>
+        <p class="card-text">Request was vague, mixed changes, or missing information.<br><strong>Fix:</strong> rewrite and resubmit.</p>
+      </div>
+      <div class="card">
+        <span class="badge badge-green"><span class="badge-dot"></span>Approval rejection</span>
+        <p class="card-text">The approver reviewed and declined.<br><strong>Fix:</strong> read the feedback, adjust, resubmit.</p>
+      </div>
+      <div class="card">
+        <span class="badge badge-red"><span class="badge-dot"></span>Missing documentation</span>
+        <p class="card-text">Latest Service Order isn't in the partner folder.<br><strong>Fix:</strong> upload it first.</p>
+      </div>
+      <div class="card">
+        <span class="badge badge-lime"><span class="badge-dot"></span>Workflow issue</span>
+        <p class="card-text">The assistant didn't start or respond as expected.<br><strong>Fix:</strong> check the Quick Start checklist, then escalate.</p>
+      </div>
+    </div>
+
+    <div class="table-wrap reveal" style="margin-top:36px;">
+      <table>
+        <thead><tr><th>Issue</th><th>Cause</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td>Assistant does not start</td><td>Task is not in "Contract Review" status</td><td>Update the task status, then try again</td></tr>
+          <tr><td>Assistant does not start</td><td>"Contract Review Agent" button was not clicked</td><td>Click the button to activate the assistant</td></tr>
+          <tr><td>Revision cannot be generated</td><td>Latest Service Order is missing from the partner folder</td><td>Upload it, then continue the conversation</td></tr>
+          <tr><td>Request is blocked</td><td>More than one change was requested in a single message</td><td>Submit each change as a separate message</td></tr>
+          <tr><td>Approval workflow stops</td><td>The designated approver rejected the draft — expected behavior</td><td>Correct the request based on feedback and submit again</td></tr>
+          <tr><td>Document looks incorrect</td><td>The generated revision needs review before it's shared</td><td>Do not share it; reject it and report to the Product Team</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout reveal">
+      <span class="label">Note</span>
+      <p>A rejected approval is not a technical error — it means the process worked correctly and the change did not meet the approver's criteria.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== FAQ ============================== -->
+<section class="section-pad on-tint" id="faq">
+  <div class="wrap-narrow">
+    <div class="section-head reveal">
+      <p class="eyebrow">12 — FAQ</p>
+      <h2 class="section-title">Questions Operations teams ask most.</h2>
+    </div>
+
+    <div class="accordion reveal" id="faqAccordion">
+      <!-- items injected identically in markup for accessibility / no-js fallback -->
+    </div>
+  </div>
+</section>
+
+<!-- ============================== QUICK REFERENCE ============================== -->
+<section class="section-pad" id="reference">
+  <div class="wrap-narrow">
+    <div class="section-head reveal">
+      <p class="eyebrow">13 — Quick Reference</p>
+      <h2 class="section-title">The one page to keep beside your monitor.</h2>
+    </div>
+
+    <div class="callout rule reveal">
+      <span class="label">Rule</span>
+      <p>One contract change per message — always.</p>
+    </div>
+
+    <div class="ref-card reveal">
+      <div class="ref-head"><h4>Action → Response → Next step</h4></div>
+      <div class="ref-body">
+        <div class="ref-row"><div class="r1">Click "Contract Review Agent"</div><div class="r2">Assistant initializes</div><div class="r3">Start writing your request</div></div>
+        <div class="ref-row"><div class="r1">Ask a contract question</div><div class="r2">Knowledge base answer</div><div class="r3">Review, share with customer</div></div>
+        <div class="ref-row"><div class="r1">Request one change</div><div class="r2">Draft prepared &amp; classified</div><div class="r3">Monitor approval result</div></div>
+        <div class="ref-row"><div class="r1">Approver approves</div><div class="r2">Document updated &amp; published</div><div class="r3">Confirm update in ClickUp</div></div>
+        <div class="ref-row"><div class="r1">Approver rejects</div><div class="r2">Workflow stops immediately</div><div class="r3">Correct and resubmit</div></div>
+      </div>
+    </div>
+
+    <div class="grid-2 reveal" style="margin-top:24px;">
+      <div class="ref-card">
+        <div class="ref-head"><h4>Who approves what</h4></div>
+        <div class="ref-body">
+          <div class="ref-row" style="grid-template-columns:1fr 2fr;"><div class="r1">Commercial</div><div class="r2">Fees, pricing, payment conditions, company info</div></div>
+          <div class="ref-row" style="grid-template-columns:1fr 2fr;"><div class="r1">Legal</div><div class="r2">Liability, governing law, compliance, wording</div></div>
+        </div>
+      </div>
+      <div class="ref-card">
+        <div class="ref-head"><h4>If something goes wrong</h4></div>
+        <div class="ref-body">
+          <div class="ref-row" style="grid-template-columns:1fr 2fr;"><div class="r1">Won't start</div><div class="r2">Check status &amp; button click</div></div>
+          <div class="ref-row" style="grid-template-columns:1fr 2fr;"><div class="r1">Blocked</div><div class="r2">More than one change?</div></div>
+          <div class="ref-row" style="grid-template-columns:1fr 2fr;"><div class="r1">Stopped</div><div class="r2">Likely an expected rejection</div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="card-title reveal" style="margin-top:48px;">Glossary</h3>
+    <div class="grid-2 reveal" style="margin-top:16px;">
+      <div>
+        <p class="card-text"><strong style="color:var(--teal-900)">Service Order</strong> — defines the commercial terms of a partner's active contract.</p>
+        <p class="card-text"><strong style="color:var(--teal-900)">Contract Review</strong> — the ClickUp task status that makes a task eligible for the assistant.</p>
+        <p class="card-text"><strong style="color:var(--teal-900)">Knowledge Base</strong> — the approved internal source used to answer questions.</p>
+        <p class="card-text"><strong style="color:var(--teal-900)">Approval</strong> — the decision required before any document change is applied.</p>
+      </div>
+      <div>
+        <p class="card-text"><strong style="color:var(--teal-900)">Approval Classification</strong> — determines if a revision is Commercial or Legal.</p>
+        <p class="card-text"><strong style="color:var(--teal-900)">Revision</strong> — a single proposed change to a Service Order or clause.</p>
+        <p class="card-text"><strong style="color:var(--teal-900)">Partner Folder</strong> — the Drive folder holding a partner's contract documents.</p>
+        <p class="card-text"><strong style="color:var(--teal-900)">Intent Detection</strong> — determines if a message is a question or a revision.</p>
+      </div>
+    </div>
+
+    <h3 class="card-title reveal" style="margin-top:48px;">Version history</h3>
+    <div class="table-wrap reveal">
+      <table>
+        <thead><tr><th>Version</th><th>Date</th><th>Summary</th></tr></thead>
+        <tbody>
+          <tr><td>1.0</td><td>Jun 2026</td><td>Initial release — setup, requests, routing, troubleshooting.</td></tr>
+          <tr><td>1.1</td><td>Jul 2026</td><td>Minor clarifications to routing and quick reference.</td></tr>
+          <tr><td>2.0</td><td>Aug 2026</td><td>Rebuilt as an editorial documentation site: live example, common mistakes, expanded FAQ, printable reference.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== SUPPORT ============================== -->
+<section class="section-pad on-tint" id="support">
+  <div class="wrap-narrow">
+    <div class="section-head reveal">
+      <p class="eyebrow">14 — Support</p>
+      <h2 class="section-title">Where to go when you need a hand.</h2>
+    </div>
+
+    <div class="grid-2 reveal">
+      <div class="contact-card">
+        <div class="card-icon"><i data-lucide="users"></i></div>
+        <div><h4 class="mini-title">Operations Team</h4><p>First point of contact for day-to-day usage questions and request scoping.</p></div>
+      </div>
+      <div class="contact-card">
+        <div class="card-icon"><i data-lucide="banknote"></i></div>
+        <div><h4 class="mini-title">Commercial Approvers</h4><p>Own decisions for fees, pricing, payment conditions, and company information.</p></div>
+      </div>
+      <div class="contact-card">
+        <div class="card-icon"><i data-lucide="scale"></i></div>
+        <div><h4 class="mini-title">Legal Approvers</h4><p>Own decisions for liability, compliance, and contractual wording.</p></div>
+      </div>
+      <div class="contact-card">
+        <div class="card-icon"><i data-lucide="wrench"></i></div>
+        <div><h4 class="mini-title">Product Team</h4><p>Owns the assistant's roadmap, incorrect-output reports, and feature requests.</p></div>
+      </div>
+    </div>
+
+    <div class="table-wrap reveal" style="margin-top:32px;">
+      <table>
+        <thead><tr><th>Situation</th><th>Escalate to</th></tr></thead>
+        <tbody>
+          <tr><td>The assistant won't activate after all checks pass</td><td>Operations Team lead</td></tr>
+          <tr><td>A generated document looks incorrect</td><td>Product Team</td></tr>
+          <tr><td>You disagree with an approval decision</td><td>The relevant Commercial or Legal approver</td></tr>
+          <tr><td>A customer disputes a published change</td><td>Operations Team lead</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-inner">
+      <a href="#top" class="brand-mark">
+        <svg viewBox="0 0 230 236" style="color:var(--white)" xmlns="http://www.w3.org/2000/svg" fill="none"><path d="M230.792 60.6168C230.792 82.7968 201.543 102.467 156.473 114.677C147.973 116.977 138.902 119.017 129.363 120.757C120.803 122.317 111.863 123.637 102.603 124.697C85.5225 126.647 67.3625 127.697 48.5325 127.697C39.3225 127.697 30.2725 127.447 21.4325 126.957C15.4625 126.627 9.5925 126.197 3.8325 125.657C0.232502 125.327 -1.3075 120.907 1.3125 118.397L17.8125 102.587L49.0925 72.6068C50.0525 71.6868 51.3925 71.2768 52.7125 71.5068C62.3025 73.1368 72.8125 74.0268 83.8325 74.0268C128.923 74.0268 165.482 59.0068 165.482 40.4868C165.482 27.6568 147.943 16.5068 122.173 10.8668C119.162 10.2068 118.073 6.48682 120.303 4.35682L123.733 1.06682C124.613 0.226823 125.853 -0.153186 127.062 0.0568137C157.152 5.34681 182.683 13.5968 200.883 23.7668C219.803 34.3468 230.803 46.9968 230.803 60.6068L230.792 60.6168Z" fill="currentColor"/><path d="M230.793 168.717C230.793 205.767 149.193 235.797 48.5325 235.797C33.8225 235.797 19.5225 235.157 5.82253 233.947C2.28253 233.637 0.692532 229.337 3.18253 226.797L48.1025 180.667C49.0725 179.667 50.4725 179.227 51.8425 179.467C61.6625 181.187 72.4725 182.137 83.8225 182.137C128.913 182.137 165.473 167.117 165.473 148.597C165.473 136.997 151.143 126.777 129.363 120.757C138.903 119.017 147.963 116.977 156.473 114.677C201.543 126.887 230.793 146.547 230.793 168.727V168.717Z" fill="currentColor"/></svg>
+        belmoney
+      </a>
+      <div class="footer-meta">
+        <span>Belmoney Operations · Internal Documentation</span>
+        <span>Version 2.0 · August 2026</span>
+      </div>
+    </div>
+    <div class="footer-rule">Questions? Reach out to Belmoney Operations. This page is best viewed in Chrome for print export.</div>
+  </div>
+</footer>
+
+<script src="app.js" defer></script>
+</body>
+</html>
