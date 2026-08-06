@@ -25,7 +25,7 @@ The page contains `noindex`, `nofollow`, `noarchive`, and `nosnippet` metadata. 
 
 Google Fonts and Lucide icons are loaded from CDNs. The document content remains readable if either CDN is unavailable, although custom fonts or icons may not appear.
 
-## Final interactive edition (v2.1)
+## Final interactive edition (v2.2)
 
 - Fixed desktop table of contents with active-section tracking
 - Mobile navigation drawer
@@ -35,3 +35,8 @@ Google Fonts and Lucide icons are loaded from CDNs. The document content remains
 - Reading progress and back-to-top controls
 - Accessible keyboard navigation and reduced-motion support
 - Print/PDF mode that removes all interactive UI
+
+
+## Request handling
+
+The assistant supports both single and multiple contract changes in the same message. Multi-part requests should be written as a clear numbered list so each item can be reviewed and routed correctly.

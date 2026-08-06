@@ -15,7 +15,7 @@
 <script defer="" src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 </head>
 <body id="top">
-<div aria-hidden="true" class="scroll-progress" id="scrollProgress"></div><aside aria-label="Document navigation" class="doc-sidebar hide-print" id="docSidebar"><div class="sidebar-brand"><span aria-hidden="true" class="brand-mark"><img src="assets/belmoney-mark.png" alt="" width="34" height="34"/></span><div><strong>AI Contract Review</strong><span>Operations guide</span></div></div><button aria-label="Search this document" class="sidebar-search" id="openSearch" type="button"><i aria-hidden="true" data-lucide="search"></i><span>Search document</span><kbd>Ctrl K</kbd></button><nav class="sidebar-nav"><a data-target="overview" href="#overview">Overview</a><a data-target="solution" href="#solution">Before &amp; After</a><a data-target="workflow" href="#workflow">Quick Start</a><a data-target="requests" href="#requests">Requests</a><a data-target="two-paths" href="#two-paths">Two Paths</a><a data-target="requests" href="#requests">Scope</a><a data-target="approval" href="#approval">Approval Flow</a><a data-target="example" href="#example">Live Example</a><a data-target="habits" href="#habits">Habits</a><a data-target="mistakes" href="#mistakes">Common Mistakes</a><a data-target="troubleshooting" href="#troubleshooting">Troubleshooting</a><a data-target="faq" href="#faq">FAQ</a><a data-target="reference" href="#reference">Quick Reference</a><a data-target="support" href="#support">Support</a></nav><div class="sidebar-meta">Internal documentation · v2.1</div></aside><button aria-expanded="false" aria-label="Open document navigation" class="mobile-menu-button hide-print" id="mobileMenu" type="button"><i aria-hidden="true" data-lucide="menu"></i></button>
+<div aria-hidden="true" class="scroll-progress" id="scrollProgress"></div><aside aria-label="Document navigation" class="doc-sidebar hide-print" id="docSidebar"><div class="sidebar-brand"><span aria-hidden="true" class="brand-mark"><img src="assets/belmoney-mark.png" alt="" width="34" height="34"/></span><div><strong>AI Contract Review</strong><span>Operations guide</span></div></div><button aria-label="Search this document" class="sidebar-search" id="openSearch" type="button"><i aria-hidden="true" data-lucide="search"></i><span>Search document</span><kbd>Ctrl K</kbd></button><nav class="sidebar-nav"><a data-target="overview" href="#overview">Overview</a><a data-target="solution" href="#solution">Before &amp; After</a><a data-target="workflow" href="#workflow">Quick Start</a><a data-target="requests" href="#requests">Requests</a><a data-target="two-paths" href="#two-paths">Two Paths</a><a data-target="requests" href="#requests">Scope</a><a data-target="approval" href="#approval">Approval Flow</a><a data-target="example" href="#example">Live Example</a><a data-target="habits" href="#habits">Habits</a><a data-target="mistakes" href="#mistakes">Common Mistakes</a><a data-target="troubleshooting" href="#troubleshooting">Troubleshooting</a><a data-target="faq" href="#faq">FAQ</a><a data-target="reference" href="#reference">Quick Reference</a><a data-target="support" href="#support">Support</a></nav><div class="sidebar-meta">Internal documentation · v2.2</div></aside><button aria-expanded="false" aria-label="Open document navigation" class="mobile-menu-button hide-print" id="mobileMenu" type="button"><i aria-hidden="true" data-lucide="menu"></i></button>
 <a class="skip-link" href="#overview">Skip to content</a>
 <main>
 <!-- ============================== OVERVIEW ============================== -->
@@ -30,7 +30,7 @@
 <div class="card">
 <div class="card-icon"><i data-lucide="message-circle"></i></div>
 <h3 class="card-title">What it is</h3>
-<p class="card-text">Operations writes one plain-English comment on a task. The assistant reads it, checks the partner's Service Order, and either answers the question or drafts the requested change.</p>
+<p class="card-text">Operations writes a clear plain-English comment on a task. The assistant reads it, checks the partner's Service Order, and either answers the question or prepares the requested change or set of changes.</p>
 </div>
 <div class="card">
 <div class="card-icon"><i data-lucide="history"></i></div>
@@ -134,7 +134,7 @@
 </div>
 <div class="step is-done">
 <div class="step-marker">3</div>
-<div><div class="step-title">Write your request</div><div class="step-text">Describe the customer's request in one plain-English comment, exactly as you'd explain it to a colleague.</div></div>
+<div><div class="step-title">Write your request</div><div class="step-text">Describe the customer's request in a clear plain-English comment, exactly as you'd explain it to a colleague. You may include more than one related change when each item is clearly identified.</div></div>
 </div>
 </div>
 <div class="callout tip reveal">
@@ -148,20 +148,20 @@
 <div class="wrap-narrow">
 <div class="section-head reveal">
 <p class="eyebrow">04 — Requests</p>
-<div class="section-title-row"><h2 class="section-title">One clear comment. One hard rule.</h2><button aria-label="Copy link to One clear comment. One hard rule." class="copy-section-link hide-print" data-section="requests" title="Copy section link" type="button"><i aria-hidden="true" data-lucide="link-2"></i></button></div>
+<div class="section-title-row"><h2 class="section-title">Clear requests produce better results.</h2><button aria-label="Copy link to Clear requests produce better results." class="copy-section-link hide-print" data-section="requests" title="Copy section link" type="button"><i aria-hidden="true" data-lucide="link-2"></i></button></div>
 </div>
 <div class="callout rule reveal">
 <span class="label">Rule</span>
-<p>Submit exactly one contract change per message. Requests containing multiple changes are stopped and must be resubmitted separately.</p>
+<p>You may request one or multiple contract changes in the same message. For multi-part requests, list each change clearly so the assistant can identify, draft, and route every item correctly.</p>
 </div>
 <div class="compare reveal">
 <div class="compare-card good">
 <div class="compare-head"><i data-lucide="check" style="width:15px;height:15px"></i> Accepted</div>
 <div class="compare-body">"Please update the Monthly Platform Fee to EUR 1,250 per month."</div>
 </div>
-<div class="compare-card bad">
-<div class="compare-head"><i data-lucide="x" style="width:15px;height:15px"></i> Blocked</div>
-<div class="compare-body">"Please update the address and change the Monthly Platform Fee."</div>
+<div class="compare-card good">
+<div class="compare-head"><i data-lucide="list-checks" style="width:15px;height:15px"></i> Multi-change request</div>
+<div class="compare-body">"Please make these updates: 1) change the registered address to 10 Downing Street; 2) update the Monthly Platform Fee to EUR 1,250 per month."</div>
 </div>
 </div>
 <div class="card reveal" style="margin-top:8px;">
@@ -182,7 +182,7 @@
 <ul class="checklist reveal" style="margin-top:28px;">
 <li><i data-lucide="check-circle-2"></i> Be specific — name the field, clause, or value that needs to change</li>
 <li><i data-lucide="check-circle-2"></i> Give context — mention who the customer is and what they're asking for</li>
-<li><i data-lucide="check-circle-2"></i> One change, one message — split multi-part requests before you submit</li>
+<li><i data-lucide="check-circle-2"></i> For multiple changes, use a numbered list and provide the exact value or wording for each item</li>
 </ul>
 </div>
 </section>
@@ -240,7 +240,7 @@
 <thead><tr><th>Scenario</th><th>Purpose</th><th>User action</th></tr></thead>
 <tbody>
 <tr><td>Answering contract questions</td><td>Resolve a question about existing terms</td><td>Review the answer before sharing with the customer</td></tr>
-<tr><td>Preparing revisions</td><td>Draft a single change to a Service Order or clause</td><td>Submit the request and monitor the approval result</td></tr>
+<tr><td>Preparing revisions</td><td>Draft one or multiple clearly defined changes to a Service Order or clause</td><td>Submit the request and monitor the approval result</td></tr>
 <tr><td>Clarifying requests</td><td>Resolve ambiguity before any action is taken</td><td>Provide the missing detail the assistant asks for</td></tr>
 <tr><td>Updating Service Orders</td><td>Reflect an approved change in the partner's file</td><td>Confirm the update once it's published to ClickUp</td></tr>
 <tr><td>Explaining clauses</td><td>Help a customer or teammate understand a clause</td><td>Confirm the explanation is accurate before forwarding it</td></tr>
@@ -338,7 +338,7 @@
 <div class="wrap-narrow">
 <div class="section-head reveal">
 <p class="eyebrow">08 — Live Example</p>
-<div class="section-title-row"><h2 class="section-title">One request, start to finish.</h2><button aria-label="Copy link to One request, start to finish." class="copy-section-link hide-print" data-section="example" title="Copy section link" type="button"><i aria-hidden="true" data-lucide="link-2"></i></button></div>
+<div class="section-title-row"><h2 class="section-title">A request, start to finish.</h2><button aria-label="Copy link to A request, start to finish." class="copy-section-link hide-print" data-section="example" title="Copy section link" type="button"><i aria-hidden="true" data-lucide="link-2"></i></button></div>
 <p class="lede">A realistic request followed through the entire lifecycle, so every piece above fits together.</p>
 </div>
 <div class="spine-wrap reveal" style="margin-top:48px;">
@@ -388,7 +388,7 @@
 </div>
 <div class="grid-2 reveal">
 <ul class="checklist mt-0">
-<li><i data-lucide="check-circle-2"></i> One change per message — mixing topics gets requests blocked</li>
+<li><i data-lucide="check-circle-2"></i> Group related changes clearly — use a numbered list when requesting multiple updates</li>
 <li><i data-lucide="check-circle-2"></i> Provide complete customer information up front</li>
 <li><i data-lucide="check-circle-2"></i> Review every draft carefully, like a colleague's first draft</li>
 </ul>
@@ -404,7 +404,7 @@
 </div>
 <div class="compare-card bad">
 <div class="compare-head"><i data-lucide="x" style="width:15px;height:15px"></i> Incorrect</div>
-<div class="compare-body">"Please update the address and change the fee and fix the liability clause" — three changes in one message.</div>
+<div class="compare-body">"Please update everything in the contract" — the requested changes and target wording are not clear.</div>
 </div>
 </div>
 </div>
@@ -422,7 +422,7 @@
 <thead><tr><th>Mistake</th><th>Why it fails</th><th>Write this instead</th></tr></thead>
 <tbody>
 <tr><td>Vague requests — "fix the contract"</td><td>The assistant has no field or clause to act on</td><td>Name the exact field: "Update the Monthly Platform Fee to EUR 1,250."</td></tr>
-<tr><td>Multiple changes in one message</td><td>Intent detection can't classify a mixed request</td><td>Split into separate messages, one per change</td></tr>
+<tr><td>Unstructured multi-part request</td><td>The assistant may not know which value or wording belongs to each change</td><td>Use a numbered list and specify the field, current context, and requested result for every item</td></tr>
 <tr><td>Missing information</td><td>The assistant pauses to ask a clarifying question</td><td>Include the full value, currency, and party up front</td></tr>
 <tr><td>Approving on the customer's behalf</td><td>Operations has no approval authority</td><td>Submit the request and wait for the approver's decision</td></tr>
 <tr><td>Re-asking after a rejection</td><td>A rejection is a decision, not an error</td><td>Read the feedback and adjust before resubmitting</td></tr>
@@ -467,7 +467,7 @@
 <tr><td>Assistant does not start</td><td>Task is not in "Contract Review" status</td><td>Update the task status, then try again</td></tr>
 <tr><td>Assistant does not start</td><td>"Contract Review Agent" button was not clicked</td><td>Click the button to activate the assistant</td></tr>
 <tr><td>Revision cannot be generated</td><td>Latest Service Order is missing from the partner folder</td><td>Upload it, then continue the conversation</td></tr>
-<tr><td>Request is blocked</td><td>More than one change was requested in a single message</td><td>Submit each change as a separate message</td></tr>
+<tr><td>Request needs clarification</td><td>One or more requested changes are vague, incomplete, or conflicting</td><td>Clarify each item with the exact field, value, or clause wording</td></tr>
 <tr><td>Approval workflow stops</td><td>The designated approver rejected the draft — expected behavior</td><td>Correct the request based on feedback and submit again</td></tr>
 <tr><td>Document looks incorrect</td><td>The generated revision needs review before it's shared</td><td>Do not share it; reject it and report to the Product Team</td></tr>
 </tbody>
@@ -520,7 +520,7 @@
 <i aria-hidden="true" data-lucide="plus"></i>
 </button>
 <div class="faq-a" id="faq-a-3" role="region">
-<div class="faq-a-inner">Yes, but one at a time. Submit each change as its own message so it gets its own clear approval decision.</div>
+<div class="faq-a-inner">Yes. You can include multiple revisions in one message. Present them as a numbered list with clear values or wording; each item can then be reviewed and routed appropriately.</div>
 </div>
 </div>
 <div class="faq-item">
@@ -547,7 +547,7 @@
 <i aria-hidden="true" data-lucide="plus"></i>
 </button>
 <div class="faq-a" id="faq-a-6" role="region">
-<div class="faq-a-inner">Split it into two messages. One change per message keeps classification accurate and gives each change its own approval trail.</div>
+<div class="faq-a-inner">You may include both in one message. List the fee change and clause change as separate numbered items so each one is understood and routed to the appropriate approver.</div>
 </div>
 </div>
 <div class="faq-item">
@@ -598,14 +598,14 @@
 </div>
 <div class="callout rule reveal">
 <span class="label">Rule</span>
-<p>One contract change per message — always.</p>
+<p>One or multiple changes are supported — clarity and complete information are essential.</p>
 </div>
 <div class="ref-card reveal">
 <div class="ref-head"><h4>Action → Response → Next step</h4></div>
 <div class="ref-body">
 <div class="ref-row"><div class="r1">Click "Contract Review Agent"</div><div class="r2">Assistant initializes</div><div class="r3">Start writing your request</div></div>
 <div class="ref-row"><div class="r1">Ask a contract question</div><div class="r2">Knowledge base answer</div><div class="r3">Review, share with customer</div></div>
-<div class="ref-row"><div class="r1">Request one change</div><div class="r2">Draft prepared &amp; classified</div><div class="r3">Monitor approval result</div></div>
+<div class="ref-row"><div class="r1">Request change(s)</div><div class="r2">Draft prepared &amp; classified</div><div class="r3">Monitor approval result</div></div>
 <div class="ref-row"><div class="r1">Approver approves</div><div class="r2">Document updated &amp; published</div><div class="r3">Confirm update in ClickUp</div></div>
 <div class="ref-row"><div class="r1">Approver rejects</div><div class="r2">Workflow stops immediately</div><div class="r3">Correct and resubmit</div></div>
 </div>
@@ -622,7 +622,7 @@
 <div class="ref-head"><h4>If something goes wrong</h4></div>
 <div class="ref-body">
 <div class="ref-row" style="grid-template-columns:1fr 2fr;"><div class="r1">Won't start</div><div class="r2">Check status &amp; button click</div></div>
-<div class="ref-row" style="grid-template-columns:1fr 2fr;"><div class="r1">Blocked</div><div class="r2">More than one change?</div></div>
+<div class="ref-row" style="grid-template-columns:1fr 2fr;"><div class="r1">Needs clarification</div><div class="r2">Are all requested items specific and complete?</div></div>
 <div class="ref-row" style="grid-template-columns:1fr 2fr;"><div class="r1">Stopped</div><div class="r2">Likely an expected rejection</div></div>
 </div>
 </div>
