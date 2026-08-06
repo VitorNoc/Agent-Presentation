@@ -1,138 +1,181 @@
-// ==========================================================================
-// Belmoney Docs — interactivity
-// ==========================================================================
+// Belmoney Docs — final interactive edition
 
 document.addEventListener("DOMContentLoaded", () => {
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const $ = (selector, root = document) => root.querySelector(selector);
+  const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 
-  /* ---------- Icons ---------- */
-  function initIcons() {
-    if (window.lucide) { window.lucide.createIcons(); }
-    else { setTimeout(initIcons, 60); }
-  }
+  const initIcons = () => window.lucide?.createIcons({ attrs: { "aria-hidden": "true" } });
   initIcons();
 
-  /* ---------- Scroll progress bar ---------- */
-  const progress = document.getElementById("scrollProgress");
-  function updateProgress() {
-    const h = document.documentElement;
-    const scrolled = h.scrollTop;
-    const max = h.scrollHeight - h.clientHeight;
-    progress.style.width = (max > 0 ? (scrolled / max) * 100 : 0) + "%";
+  const progress = $("#scrollProgress");
+  const backToTop = $("#backToTop");
+  const sidebar = $("#docSidebar");
+  const mobileMenu = $("#mobileMenu");
+  const navLinks = $$(".sidebar-nav a");
+  const sections = $$("main > section[id]");
+
+  function updatePageState() {
+    const root = document.documentElement;
+    const max = root.scrollHeight - root.clientHeight;
+    const ratio = max > 0 ? root.scrollTop / max : 0;
+    if (progress) progress.style.width = `${ratio * 100}%`;
+    backToTop?.classList.toggle("is-visible", window.scrollY > 650);
   }
-  document.addEventListener("scroll", updateProgress, { passive: true });
-  updateProgress();
+  document.addEventListener("scroll", updatePageState, { passive: true });
+  window.addEventListener("resize", updatePageState);
+  updatePageState();
 
-  /* ---------- Reveal on scroll ---------- */
-  const revealItems = document.querySelectorAll(".reveal");
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("in-view");
-        revealObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
-  revealItems.forEach(el => revealObserver.observe(el));
-
-  /* ---------- Nav active link highlighting ---------- */
-  const sections = Array.from(document.querySelectorAll("main section[id], header[id]"));
-  const navLinks = Array.from(document.querySelectorAll(".navlinks a"));
-  function setActiveNav() {
-    let currentId = null;
-    const scrollPos = window.scrollY + 140;
-    sections.forEach(sec => {
-      if (sec.offsetTop <= scrollPos) currentId = sec.id;
-    });
-    navLinks.forEach(a => {
-      const match = a.getAttribute("href") === "#" + currentId;
-      a.classList.toggle("active", match);
-    });
+  if ("IntersectionObserver" in window) {
+    const navObserver = new IntersectionObserver((entries) => {
+      const visible = entries.filter(e => e.isIntersecting).sort((a,b) => b.intersectionRatio-a.intersectionRatio)[0];
+      if (!visible) return;
+      navLinks.forEach(link => link.classList.toggle("is-active", link.dataset.target === visible.target.id));
+    }, { rootMargin: "-18% 0px -68% 0px", threshold: [0, .15, .5] });
+    sections.forEach(section => navObserver.observe(section));
   }
-  document.addEventListener("scroll", setActiveNav, { passive: true });
-  setActiveNav();
 
-  /* ---------- Step "spine" fill, driven by scroll position within each stepper ---------- */
-  const spines = document.querySelectorAll(".spine-wrap");
+  mobileMenu?.addEventListener("click", () => {
+    const open = sidebar.classList.toggle("is-open");
+    mobileMenu.setAttribute("aria-expanded", String(open));
+  });
+  navLinks.forEach(link => link.addEventListener("click", () => {
+    sidebar?.classList.remove("is-open");
+    mobileMenu?.setAttribute("aria-expanded", "false");
+  }));
+
+  const revealItems = $$(".reveal");
+  if (reduceMotion || !("IntersectionObserver" in window)) {
+    revealItems.forEach(item => item.classList.add("in-view"));
+  } else {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: "0px 0px -32px 0px" });
+    revealItems.forEach(item => revealObserver.observe(item));
+  }
+
+  const spines = $$(".spine-wrap");
   function updateSpines() {
     spines.forEach(wrap => {
       const rect = wrap.getBoundingClientRect();
-      const vh = window.innerHeight;
       const total = rect.height;
-      let progressed = (vh * 0.75 - rect.top);
-      progressed = Math.max(0, Math.min(total, progressed));
+      const progressed = Math.max(0, Math.min(total, innerHeight * 0.75 - rect.top));
       const ratio = total > 0 ? progressed / total : 0;
-      const fillLine = wrap.querySelector(".spine-fill");
-      if (fillLine) {
-        fillLine.setAttribute("y2", (ratio * 100) + "%");
-      }
-      const steps = wrap.querySelectorAll(".step");
-      const stepRatio = 1 / steps.length;
-      steps.forEach((step, i) => {
-        step.classList.toggle("is-active", ratio >= i * stepRatio);
-      });
+      wrap.querySelector(".spine-fill")?.setAttribute("y2", `${ratio * 100}%`);
+      const steps = $$(".step", wrap);
+      const stepRatio = steps.length ? 1 / steps.length : 1;
+      steps.forEach((step, index) => step.classList.toggle("is-active", ratio >= index * stepRatio));
     });
   }
   document.addEventListener("scroll", updateSpines, { passive: true });
   window.addEventListener("resize", updateSpines);
   updateSpines();
 
-  /* ---------- FAQ accordion (built from data, keeps markup lean) ---------- */
-  const faqData = [
-    ["Can Operations approve contracts?", "No. Approval always belongs to the designated Commercial or Legal approver, based on what's being changed. Operations submits the request and monitors the result."],
-    ["How does the assistant decide who approves a change?", "It classifies the request automatically. Commercial fields (fees, pricing, company information) go to the Commercial approver; legal fields (liability, compliance, wording) go to the Legal approver."],
-    ["Can I continue after approval?", "Yes. The task thread stays open, so you can keep the conversation going for follow-up requests."],
-    ["Can I request multiple revisions?", "Yes, but one at a time. Submit each change as its own message so it gets its own clear approval decision."],
-    ["What happens when approval is rejected?", "The workflow stops immediately. No document is changed. Correct the request based on the approver's feedback and submit it again."],
-    ["Can the AI modify documents automatically?", "No. Every document change requires explicit approval from the designated approver first."],
-    ["What if my request touches both a fee and a clause?", "Split it into two messages. One change per message keeps classification accurate and gives each change its own approval trail."],
-    ["A partner is pushing for a same-day answer — can I skip the approval step?", "No. Approval timing depends on the approver's availability, not customer urgency. Let the customer know the request is in review, and flag time-sensitive cases to your team lead."],
-    ["The assistant asked a clarifying question instead of drafting a revision — is that normal?", "Yes. If your message is missing a detail the assistant needs, it will ask instead of guessing. Reply with the missing detail in the same thread."],
-    ["I submitted a request and nothing happened for a while — should I resubmit?", "Check the task status and comment thread first. If there's truly no response, see Troubleshooting before resubmitting."],
-    ["Can I use the assistant for a partner that isn't in ClickUp yet?", "No. The assistant only operates within a ClickUp task that already has Contract Review status and an available Service Order."]
-  ];
-
-  const accordion = document.getElementById("faqAccordion");
-  if (accordion) {
-    faqData.forEach(([q, a], i) => {
-      const item = document.createElement("div");
-      item.className = "faq-item";
-      item.innerHTML = `
-        <button class="faq-q" aria-expanded="false" aria-controls="faq-a-${i}">
-          <span>${q}</span>
-          <i data-lucide="plus"></i>
-        </button>
-        <div class="faq-a" id="faq-a-${i}">
-          <div class="faq-a-inner">${a}</div>
-        </div>`;
-      accordion.appendChild(item);
+  const accordion = $("#faqAccordion");
+  accordion?.addEventListener("click", event => {
+    const button = event.target.closest(".faq-q");
+    if (!button) return;
+    const item = button.closest(".faq-item");
+    const answer = $(".faq-a", item);
+    const willOpen = !item.classList.contains("open");
+    $$(".faq-item.open", accordion).forEach(openItem => {
+      if (openItem === item) return;
+      openItem.classList.remove("open");
+      $(".faq-a", openItem).style.maxHeight = "";
+      $(".faq-q", openItem).setAttribute("aria-expanded", "false");
     });
-    initIcons();
+    item.classList.toggle("open", willOpen);
+    button.setAttribute("aria-expanded", String(willOpen));
+    answer.style.maxHeight = willOpen ? `${answer.scrollHeight}px` : "";
+  });
 
-    accordion.addEventListener("click", (e) => {
-      const btn = e.target.closest(".faq-q");
-      if (!btn) return;
-      const item = btn.closest(".faq-item");
-      const answer = item.querySelector(".faq-a");
-      const isOpen = item.classList.contains("open");
+  $("#printDocument")?.addEventListener("click", () => window.print());
 
-      accordion.querySelectorAll(".faq-item.open").forEach(openItem => {
-        if (openItem !== item) {
-          openItem.classList.remove("open");
-          openItem.querySelector(".faq-a").style.maxHeight = null;
-          openItem.querySelector(".faq-q").setAttribute("aria-expanded", "false");
-        }
-      });
-
-      if (isOpen) {
-        item.classList.remove("open");
-        answer.style.maxHeight = null;
-        btn.setAttribute("aria-expanded", "false");
-      } else {
-        item.classList.add("open");
-        answer.style.maxHeight = answer.scrollHeight + "px";
-        btn.setAttribute("aria-expanded", "true");
-      }
-    });
+  const toast = $("#toast");
+  let toastTimer;
+  function showToast(message) {
+    if (!toast) return;
+    toast.textContent = message;
+    toast.classList.add("is-visible");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove("is-visible"), 1800);
   }
 
+  $$(".copy-section-link").forEach(button => button.addEventListener("click", async () => {
+    const url = `${location.origin}${location.pathname}#${button.dataset.section}`;
+    try { await navigator.clipboard.writeText(url); showToast("Section link copied"); }
+    catch { location.hash = button.dataset.section; showToast("Section opened"); }
+  }));
+
+  const themeToggle = $("#themeToggle");
+  const storedTheme = localStorage.getItem("belmoney-doc-theme");
+  const preferredDark = matchMedia("(prefers-color-scheme: dark)").matches;
+  const initialTheme = storedTheme || (preferredDark ? "dark" : "light");
+  document.documentElement.dataset.theme = initialTheme;
+  function syncThemeIcon() {
+    const dark = document.documentElement.dataset.theme === "dark";
+    themeToggle?.setAttribute("aria-label", dark ? "Switch to light theme" : "Switch to dark theme");
+    themeToggle?.setAttribute("title", dark ? "Light theme" : "Dark theme");
+    if (themeToggle) themeToggle.innerHTML = `<i data-lucide="${dark ? "sun" : "moon"}" aria-hidden="true"></i>`;
+    initIcons();
+  }
+  syncThemeIcon();
+  themeToggle?.addEventListener("click", () => {
+    const next = document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = next;
+    localStorage.setItem("belmoney-doc-theme", next);
+    syncThemeIcon();
+  });
+
+  const dialog = $("#searchDialog");
+  const searchInput = $("#searchInput");
+  const results = $("#searchResults");
+  const status = $("#searchStatus");
+  const searchable = sections.map(section => ({
+    id: section.id,
+    title: $(".section-title", section)?.textContent.trim() || section.id,
+    text: section.textContent.replace(/\s+/g, " ").trim()
+  }));
+  function openSearch() {
+    dialog.hidden = false;
+    document.body.style.overflow = "hidden";
+    setTimeout(() => searchInput.focus(), 0);
+  }
+  function closeSearch() {
+    dialog.hidden = true;
+    document.body.style.overflow = "";
+    searchInput.value = "";
+    results.innerHTML = "";
+    status.textContent = "Type to search headings and content.";
+  }
+  $("#openSearch")?.addEventListener("click", openSearch);
+  $$('[data-close-search]').forEach(el => el.addEventListener("click", closeSearch));
+  document.addEventListener("keydown", event => {
+    if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") { event.preventDefault(); openSearch(); }
+    if (event.key === "Escape" && !dialog.hidden) closeSearch();
+  });
+  searchInput?.addEventListener("input", () => {
+    const query = searchInput.value.trim().toLowerCase();
+    results.innerHTML = "";
+    if (!query) { status.textContent = "Type to search headings and content."; return; }
+    const matches = searchable.filter(item => item.text.toLowerCase().includes(query)).slice(0, 12);
+    status.textContent = `${matches.length} result${matches.length === 1 ? "" : "s"}`;
+    if (!matches.length) { results.innerHTML = '<div class="search-empty">No matching section found.</div>'; return; }
+    matches.forEach(item => {
+      const pos = item.text.toLowerCase().indexOf(query);
+      const start = Math.max(0, pos - 55);
+      const excerpt = `${start ? "…" : ""}${item.text.slice(start, start + 150)}${item.text.length > start + 150 ? "…" : ""}`;
+      const link = document.createElement("a");
+      link.className = "search-result";
+      link.href = `#${item.id}`;
+      link.innerHTML = `<strong>${item.title}</strong><span>${excerpt}</span>`;
+      link.addEventListener("click", closeSearch);
+      results.appendChild(link);
+    });
+  });
 });

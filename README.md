@@ -1,38 +1,37 @@
 # Belmoney — AI Contract Review Assistant (Docs Site)
 
-A handcrafted, single-page editorial documentation site. No frameworks, no build step.
+Single-page internal documentation site built with HTML, CSS, and JavaScript. No framework or build step is required.
 
 ## Files
 
-```
-belmoney-docs/
-  index.html   All markup and content, section by section
-  styles.css   Design tokens + full visual system (screen)
-  print.css    Print/PDF-specific overrides, loaded only for @media print
-  app.js       Scroll progress, reveal-on-scroll, stepper "spine" fill,
-               nav active-state, and the FAQ accordion
-```
+- `index.html` — document content and accessible FAQ markup
+- `styles.css` — visual system and responsive layout
+- `print.css` — A4/PDF export rules
+- `app.js` — icons, progress bar, reveal effects, step indicators, FAQ, print, and back-to-top controls
 
-Fonts (League Spartan, Roboto, Roboto Mono) load from Google Fonts, and icons
-from the Lucide CDN — both are standard `<link>`/`<script>` tags in `index.html`,
-so an internet connection is needed the first time a browser opens the page.
+## Viewing locally
 
-## Viewing
-
-Open `index.html` directly in any modern browser. No server required.
+Open `index.html` with VS Code Live Server, or open it directly in a modern browser.
 
 ## Exporting to PDF
 
-Click "Print / PDF" in the top navigation, or press Cmd/Ctrl+P.
-In the print dialog, make sure **Background graphics** is turned on so the
-dark sections and colored callouts print correctly. `print.css` handles
-pagination: it keeps cards, tables, and steps from splitting across pages,
-expands the FAQ answers, and hides anything screen-only (nav, scroll cues,
-the print button itself).
+Use the floating **Print / PDF** button or press `Ctrl+P`. Enable **Background graphics** in the browser print dialog. FAQ answers are automatically expanded in print.
 
-## Editing content
+## Publishing
 
-All copy lives directly in `index.html`, section by section, in the same
-order as the on-page navigation. The FAQ is the one exception — its
-questions and answers are stored as data at the top of `app.js` so new
-entries don't require touching the accordion markup.
+The page contains `noindex`, `nofollow`, `noarchive`, and `nosnippet` metadata. This helps keep it out of search results, but it does **not** make the page private. Protect sensitive internal documentation with authentication, access control, VPN, or a private network.
+
+## External assets
+
+Google Fonts and Lucide icons are loaded from CDNs. The document content remains readable if either CDN is unavailable, although custom fonts or icons may not appear.
+
+## Final interactive edition (v2.1)
+
+- Fixed desktop table of contents with active-section tracking
+- Mobile navigation drawer
+- Full-document search (`Ctrl/Cmd + K`)
+- Light and dark themes with saved preference
+- Copyable deep links for every section
+- Reading progress and back-to-top controls
+- Accessible keyboard navigation and reduced-motion support
+- Print/PDF mode that removes all interactive UI

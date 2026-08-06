@@ -17,21 +17,17 @@
 
 .hide-print,
 .scroll-progress,
-.scroll-cue,
-.hero-stage,
-.nav-toggle {
+.document-actions,
+.skip-link {
   display: none !important;
 }
 
-.topnav { position: static !important; backdrop-filter: none !important; }
 
 body { font-size: 12.5px; }
+main > .section-pad:first-child { padding-top: 0 !important; }
 
 .reveal { opacity: 1 !important; transform: none !important; }
 
-header.hero {
-  break-inside: avoid-page;
-}
 .section-pad { padding: 20px 0 !important; }
 .section-head { margin-bottom: 24px !important; }
 
@@ -43,13 +39,10 @@ table { break-inside: auto; }
 tr { break-inside: avoid; }
 thead { display: table-header-group; }
 
-.hero { padding-top: 24px !important; }
-.hero-lede, .hero h1 { max-width: none; }
-.hero-actions { display: none !important; }
 
 a[href^="#"]::after { content: ""; }
 
-.on-dark, .hero, footer.site-footer {
+.on-dark {
   background: var(--teal-900) !important;
   color: var(--white) !important;
 }
@@ -63,3 +56,9 @@ a[href^="#"]::after { content: ""; }
 .accordion { border-top: 0; }
 
 .wrap, .wrap-narrow { max-width: none; }
+.doc-sidebar,
+.mobile-menu-button,
+.search-dialog,
+.toast,
+.copy-section-link { display: none !important; }
+main { margin-left: 0 !important; }
