@@ -1,0 +1,64 @@
+/* ==========================================================================
+   Print / PDF export rules
+   Chrome: File > Print > Save as PDF, with "Background graphics" enabled.
+   ========================================================================== */
+
+@page {
+  size: A4;
+  margin: 16mm 14mm;
+}
+
+* {
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+  animation: none !important;
+  transition: none !important;
+}
+
+.hide-print,
+.scroll-progress,
+.document-actions,
+.skip-link {
+  display: none !important;
+}
+
+
+body { font-size: 12.5px; }
+main > .section-pad:first-child { padding-top: 0 !important; }
+
+.reveal { opacity: 1 !important; transform: none !important; }
+
+.section-pad { padding: 20px 0 !important; }
+.section-head { margin-bottom: 24px !important; }
+
+h1, h2, h3, h4 { break-after: avoid; }
+.section-head, .card, .callout, .compare-card, .path-card, .mockup, .ref-card, .contact-card, .step, .grid-2, .grid-3, .path-cards, .compare {
+  break-inside: avoid;
+}
+table { break-inside: auto; }
+tr { break-inside: avoid; }
+thead { display: table-header-group; }
+
+
+a[href^="#"]::after { content: ""; }
+
+.on-dark {
+  background: var(--teal-900) !important;
+  color: var(--white) !important;
+}
+
+.spine-svg { display: none; }
+.step { grid-template-columns: 32px 1fr; }
+.step-marker { width: 32px; height: 32px; font-size: 13px; background: var(--lime) !important; border-color: var(--lime) !important; color: var(--teal-900) !important; }
+
+.faq-a { max-height: none !important; }
+.faq-q svg { display: none; }
+.accordion { border-top: 0; }
+
+.wrap, .wrap-narrow { max-width: none; }
+.doc-sidebar,
+.mobile-menu-button,
+.search-dialog,
+.toast,
+.copy-section-link { display: none !important; }
+main { margin-left: 0 !important; }
